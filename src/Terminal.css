@@ -1,0 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=MesloLGS+NF&display=swap");
+
+body {
+  @apply bg-black text-white;
+  font-family: "MesloLGS NF", "Fira Code", monospace; /* Updated to include MesloLGS NF */
+}
+
+#terminal {
+  @apply h-screen w-screen bg-black text-[#DCDCDD] rounded-lg shadow-lg p-4 border border-gray-800;
+  overflow: hidden;
+}
+
+.terminal-focused {
+  @apply ring-2 ring-blue-500;
+}

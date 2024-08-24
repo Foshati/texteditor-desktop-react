@@ -6,15 +6,14 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import EditorContext from "./EditorContext";
 import TextareaCodeEditor from "./TextareaCodeEditor";
-import Terminal from "./Terminal";
 import { convertFileSrc } from "@tauri-apps/api/tauri";
 import FileTabs from "./FileTabs";
+import Terminal from "./Terminal";  // Make sure to import Terminal component
 
 export default function Editor() {
   const [assetUrl, setAssetUrl] = useState(null);
   const { openFiles, currentFile, currentDirectory } =
     useContext(EditorContext);
-
   const imagePreviewExtensions = [
     "jpg",
     "jpeg",
@@ -124,6 +123,7 @@ export default function Editor() {
       </main>
     );
   } else {
+
     return (
       <main className="h-full w-full artboard">
         <FileTabs />

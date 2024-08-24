@@ -86,9 +86,8 @@ function App() {
       >
         <SideTabs tabHandler={setCurrentTab} />
         <aside
-          className={`overflow-auto bg-base-200 flex-none ${
-            sidePanel == false ? "w-0" : "w-56 max-w-56"
-          }`}
+          className={`overflow-auto bg-base-200 flex-none ${sidePanel == false ? "w-0" : "w-56 max-w-56"
+            }`}
         >
           {currentDirectory == null && (
             <div className="p-4 flex justify-center items-center h-full w-full">

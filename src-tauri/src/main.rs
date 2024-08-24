@@ -18,7 +18,9 @@ use crate::io::{
     copy_file, create_directory, create_file, detect_changes, move_file_or_directory,
     read_directory, read_file, remove_directory, remove_file, search_directory, write_to_file,
 };
-use crate::terminal::run_command;
+use crate::terminal::{
+    setup_terminal, async_create_shell, async_write_to_pty, async_read_from_pty, async_resize_pty
+};
 use lazy_static::lazy_static;
 use std::sync::Mutex;
 use tauri::Manager;
@@ -36,6 +38,8 @@ fn emit_event(event: String, payload: String) -> Result<(), errors::Error> {
 }
 
 fn main() {
+    let terminal_state = setup_terminal();
+
     tauri::Builder::default()
         .setup(|app| {
             let app_handle = app.handle();
@@ -43,6 +47,7 @@ fn main() {
             detect_changes();
             Ok(())
         })
+        .manage(terminal_state)
         .invoke_handler(tauri::generate_handler![
             copy_file,
             create_directory,
@@ -60,12 +65,15 @@ fn main() {
             git_init,
             git_push,
             highlight_code,
-            run_command,
             get_suggestions,
             does_git_exist,
             is_git_repo,
             git_clone,
-            copilot
+            copilot,
+            async_create_shell,
+            async_write_to_pty,
+            async_read_from_pty,
+            async_resize_pty
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
